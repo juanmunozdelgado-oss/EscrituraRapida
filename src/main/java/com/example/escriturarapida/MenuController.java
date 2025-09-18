@@ -46,9 +46,9 @@ public class MenuController {
      * @param event button click event
      */
     @FXML
-    private void jugar(ActionEvent event) {
+    private void play(ActionEvent event) {
         try {
-            cambiarEscena(event, "GameMenu.fxml","");
+            switchScene(event, "GameMenu.fxml","");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,9 +59,9 @@ public class MenuController {
      * @param event button click event
      */
     @FXML
-    private void ayuda(ActionEvent event) {
+    private void help(ActionEvent event) {
         try {
-            cambiarEscena(event, "HelpMenu.fxml", "");
+            switchScene(event, "HelpMenu.fxml", "");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,7 +73,7 @@ public class MenuController {
      * @param event button click event
      */
     @FXML
-    private void salir(ActionEvent event) {
+    private void exit(ActionEvent event) {
         Platform.exit();
         System.exit(0);
     }
@@ -89,7 +89,7 @@ public class MenuController {
      * @param titulo   the window title to set
      * @throws IOException if the FXML file cannot be loaded
      */
-    private void cambiarEscena(ActionEvent event, String fxmlFile, String titulo) throws IOException {
+    private void switchScene(ActionEvent event, String fxmlFile, String titulo) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 600);

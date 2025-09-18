@@ -27,7 +27,7 @@ import java.io.IOException;
  *   1.0
  */
 
-public class MainMenu extends Application {
+public class Main extends Application {
 
     /**
      * Main method. Launches the JavaFX application.
@@ -45,7 +45,7 @@ public class MainMenu extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(MainMenu.class.getResource("MainMenu.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 600);
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);

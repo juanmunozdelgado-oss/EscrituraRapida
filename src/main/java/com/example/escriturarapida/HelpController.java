@@ -35,7 +35,7 @@ public class HelpController {
      * @param event button click event
      */
     @FXML
-    private void volver(ActionEvent event) {
+    private void back(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

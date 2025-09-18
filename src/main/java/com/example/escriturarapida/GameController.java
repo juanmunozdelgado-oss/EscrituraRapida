@@ -3,7 +3,6 @@ package com.example.escriturarapida;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,15 +47,15 @@ public class GameController {
      * ---------- FXML UI ELEMENTS ----------
      */
     @FXML
-    private Label nivelLabel;
+    private Label levelLabel;
     @FXML
-    private Label tiempoLabel;
+    private Label timeLabel;
     @FXML
-    private Label palabraLabel;
+    private Label wordLabel;
     @FXML
-    private TextField entradaTextField;
+    private TextField entryTextField;
     @FXML
-    private Label tiempoMaxLabel;
+    private Label maxTimeLabel;
 
 
     /**
@@ -128,10 +127,10 @@ public class GameController {
         iniciarTimer();
 
 
-        entradaTextField.setOnKeyPressed(this::manejarTeclaPresionada);
+        entryTextField.setOnKeyPressed(this::manejarTeclaPresionada);
 
 
-        entradaTextField.requestFocus();
+        entryTextField.requestFocus();
     }
     /**
      * ---------- WORD SELECTION ----------
@@ -225,13 +224,13 @@ public class GameController {
      * Updates score, level, and UI accordingly.
      */
     private void validarPalabra() {
-        String palabraEscrita = entradaTextField.getText().trim();
+        String palabraEscrita = entryTextField.getText().trim();
 
         if (palabraEscrita.equals(palabraActual)) {
 
             success++;
             nivel++;
-            entradaTextField.clear();
+            entryTextField.clear();
 
 
             int reduccion = ((nivel - 1) / 5) * 2;
@@ -244,13 +243,13 @@ public class GameController {
             reiniciarTimer();
 
 
-            entradaTextField.setStyle("-fx-background-color: #ccffcc; -fx-border-color: green;");
+            entryTextField.setStyle("-fx-background-color: #ccffcc; -fx-border-color: green;");
 
 
 
             Timeline feedback = new Timeline(new KeyFrame(Duration.millis(500), e -> {
                 if (juegoActivo) {
-                    entradaTextField.setStyle("");
+                    entryTextField.setStyle("");
                 }
             }));
             feedback.play();
@@ -265,13 +264,13 @@ public class GameController {
             failure++;
 
 
-            entradaTextField.setStyle("-fx-background-color: #ffcccc; -fx-border-color: red;");
+            entryTextField.setStyle("-fx-background-color: #ffcccc; -fx-border-color: red;");
 
 
 
             Timeline feedback = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
                 if (juegoActivo) {
-                    entradaTextField.setStyle("");
+                    entryTextField.setStyle("");
                 }
             }));
             feedback.play();
@@ -297,7 +296,7 @@ public class GameController {
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("GameOver.fxml"));
-            Stage stage = (Stage) entradaTextField.getScene().getWindow();
+            Stage stage = (Stage) entryTextField.getScene().getWindow();
             Scene scene = new Scene(root, 600, 600);
             stage.setScene(scene);
             stage.show();
@@ -321,14 +320,14 @@ public class GameController {
         juegoActivo = true;
         success = 0;
         failure = 0;
-        entradaTextField.clear();
-        entradaTextField.setStyle("");
+        entryTextField.clear();
+        entryTextField.setStyle("");
         inicializarPalabrasDisponibles();
 
         seleccionarPalabra();
         iniciarTimer();
         actualizarInterfaz();
-        entradaTextField.requestFocus();
+        entryTextField.requestFocus();
     }
     /**
      * ---------- UI UPDATES ----------
@@ -337,28 +336,28 @@ public class GameController {
      * Updates labels and UI elements (level, time, word).
      */
     private void actualizarInterfaz() {
-        if (tiempoMaxLabel != null) {
+        if (maxTimeLabel != null) {
             int tiempomaximo = tiempoMaximo;
-            tiempoMaxLabel.setText("Tiempo max: " + tiempomaximo);
+            maxTimeLabel.setText("Tiempo max: " + tiempomaximo);
         }
-        if (nivelLabel != null) {
+        if (levelLabel != null) {
             String dificultad = obtenerDificultad();
-            nivelLabel.setText("Nivel: " + nivel + " (" + dificultad + ")");
+            levelLabel.setText("Nivel: " + nivel + " (" + dificultad + ")");
         }
-        if (tiempoLabel != null) {
-            tiempoLabel.setText(String.valueOf(tiempoRestante));
+        if (timeLabel != null) {
+            timeLabel.setText(String.valueOf(tiempoRestante));
 
             // Cambiar color según el tiempo restante
             if (tiempoRestante <= 3) {
-                tiempoLabel.setStyle("-fx-text-fill: red;");
+                timeLabel.setStyle("-fx-text-fill: red;");
             } else if (tiempoRestante <= 7) {
-                tiempoLabel.setStyle("-fx-text-fill: orange;");
+                timeLabel.setStyle("-fx-text-fill: orange;");
             } else {
-                tiempoLabel.setStyle("-fx-text-fill: white;");
+                timeLabel.setStyle("-fx-text-fill: white;");
             }
         }
-        if (palabraLabel != null) {
-            palabraLabel.setText(palabraActual);
+        if (wordLabel != null) {
+            wordLabel.setText(palabraActual);
         }
     }
     /**

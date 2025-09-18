@@ -31,12 +31,12 @@
                         <Image url="@Images/MaderaRustica.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="nivelLabel" layoutX="34.0" layoutY="46.0" text="Nivel: 1 (Fácil)" textFill="#fcfcfc">
+                <Label fx:id="levelLabel" layoutX="34.0" layoutY="46.0" text="Nivel: 1 (Fácil)" textFill="#fcfcfc">
                     <font>
                         <Font name="Jersey 20 Regular" size="18.0" />
                     </font>
                 </Label>
-                <Label fx:id="tiempoMaxLabel" layoutX="37.0" layoutY="74.0" text="Tiempo máx: 20s" textFill="#fcfcfc">
+                <Label fx:id="maxTimeLabel" layoutX="37.0" layoutY="74.0" text="Tiempo máx: 20s" textFill="#fcfcfc">
                     <font>
                         <Font name="Jersey 20 Regular" size="14.0" />
                     </font>
@@ -52,7 +52,7 @@
                         <Image url="@Images/TimerImage.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="tiempoLabel" layoutX="145.0" layoutY="43.0" text="20" textFill="WHITE">
+                <Label fx:id="timeLabel" layoutX="145.0" layoutY="43.0" text="20" textFill="WHITE">
                     <font>
                         <Font name="Jersey 20 Regular" size="48.0" />
                     </font>
@@ -73,7 +73,7 @@
                         <Image url="@Images/CuadroDeTexto.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="palabraLabel" layoutX="180.0" layoutY="35.0" text="casa" textAlignment="CENTER">
+                <Label fx:id="wordLabel" layoutX="180.0" layoutY="35.0" text="casa" textAlignment="CENTER">
                     <font>
                         <Font name="Jersey 20 Regular" size="24.0" />
                     </font>
@@ -99,7 +99,7 @@
                         <Image url="@Images/WritingImage.png" />
                     </image>
                 </ImageView>
-                <TextField fx:id="entradaTextField" layoutX="213.0" layoutY="47.0" prefHeight="28.0" prefWidth="172.0">
+                <TextField fx:id="entryTextField" layoutX="213.0" layoutY="47.0" prefHeight="28.0" prefWidth="172.0">
                     <font>
                         <Font name="Jersey 20 Regular" size="16.0" />
                     </font>
