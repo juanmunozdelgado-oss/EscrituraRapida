@@ -1,6 +1,5 @@
 package com.example.escriturarapida;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,15 +34,15 @@ public class StatsController {
      * ---------- FXML UI ELEMENTS ----------
      */
     @FXML
-    private Label palabrasCorrectasLabel;
+    private Label rightWordsLabel;
 
     @FXML
-    private Label erroresLabel;
+    private Label errorsLabel;
     /**
      * ---------- STATIC DATA FIELDS ----------
      */
-    private static int palabrasCorrectas = 0;
-    private static int errores = 0;
+    private static int rightWords = 0;
+    private static int errors = 0;
     /**
      * ---------- INITIALIZATION ----------
      */
@@ -54,7 +53,7 @@ public class StatsController {
      */
     @FXML
     private void initialize() {
-        actualizarEstadisticas();
+        updateStats();
     }
     /**
      * ---------- STATIC METHODS ----------
@@ -66,9 +65,9 @@ public class StatsController {
      * @param correctas number of correctly typed words
      * @param fallos    number of mistakes made
      */
-    public static void actualizarStats(int correctas, int fallos) {
-        palabrasCorrectas = correctas;
-        errores = fallos;
+    public static void updateStats(int correctas, int fallos) {
+        rightWords = correctas;
+        errors = fallos;
     }
     /**
      * ---------- PRIVATE METHODS ----------
@@ -77,12 +76,12 @@ public class StatsController {
     /**
      * Refreshes the statistics labels displayed on screen.
      */
-    private void actualizarEstadisticas() {
-        if (palabrasCorrectasLabel != null) {
-            palabrasCorrectasLabel.setText("Palabras Correctas: " + palabrasCorrectas);
+    private void updateStats() {
+        if (rightWordsLabel != null) {
+            rightWordsLabel.setText("Palabras Correctas: " + rightWords);
         }
-        if (erroresLabel != null) {
-            erroresLabel.setText("Errores: " + errores);
+        if (errorsLabel != null) {
+            errorsLabel.setText("Errores: " + errors);
         }
     }
     /**
@@ -95,7 +94,7 @@ public class StatsController {
      * @param event button click event
      */
     @FXML
-    private void salir(ActionEvent event) {
+    private void exit(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();

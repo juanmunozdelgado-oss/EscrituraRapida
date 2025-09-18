@@ -61,12 +61,12 @@ public class GameController {
     /**
      * ---------- GAME STATE VARIABLES ----------
      */
-    private int nivel = 1;
-    private int tiempoRestante = 20;
-    private int tiempoMaximo = 20;
-    private String palabraActual;
+    private int level = 1;
+    private int timeLeft = 20;
+    private int maxTime = 20;
+    private String currentWord;
     private Timeline timer;
-    private boolean juegoActivo = true;
+    private boolean gameActive = true;
     private int success = 0;
     private int failure = 0;
 
@@ -74,23 +74,23 @@ public class GameController {
      * Word pools
      */
     private Random random = new Random();
-    private ArrayList<String> palabrasDisponiblesFaciles;
-    private ArrayList<String> palabrasDisponiblesMedias;
-    private ArrayList<String> palabrasDisponiblesDificiles;
+    private ArrayList<String> easyWordsLeft;
+    private ArrayList<String> mediumWordsLeft;
+    private ArrayList<String> hardWordsLeft;
 
-    private final List<String> palabrasFaciles = Arrays.asList(
+    private final List<String> easyWords = Arrays.asList(
             "casa", "perro", "gato", "agua", "fuego",
             "libro", "mesa", "silla", "puerta", "ventana",
             "flores", "cielo", "tierra", "verde", "azul"
     );
 
-    private final List<String> palabrasMedias = Arrays.asList(
+    private final List<String> mediumWords = Arrays.asList(
             "computadora", "refrigerador", "bicicleta", "televisión", "automóvil",
             "supermercado", "restaurante", "biblioteca", "universidad", "hospital",
             "refrigeradora", "microondas", "lavadora", "aspiradora", "impresora"
     );
 
-    private final List<String> palabrasDificiles = Arrays.asList(
+    private final List<String> hardWords = Arrays.asList(
             "electroencefalograma", "otorrinolaringología", "esternocleidomastoideo", "fotoestimulación", "desoxirribonucleico",
             "neurofibromatosis", "electromiográficos", "anticonstitucionalísimamente", "electrocardiografía", "psiconeuroendocrinología",
             "cardiotocografía", "neuropsiquiatría", "colangiopancreatografía", "espectrofotofluorometría", "magnetohidrodinámica"
@@ -103,14 +103,14 @@ public class GameController {
      * Initializes the word pools for easy, medium, and hard difficulties.
      * Shuffles them to ensure randomness.
      */
-    private void inicializarPalabrasDisponibles() {
-        palabrasDisponiblesFaciles = new ArrayList<>(palabrasFaciles);
-        palabrasDisponiblesMedias = new ArrayList<>(palabrasMedias);
-        palabrasDisponiblesDificiles = new ArrayList<>(palabrasDificiles);
+    private void iniatilizateWordsLeft() {
+        easyWordsLeft = new ArrayList<>(easyWords);
+        mediumWordsLeft = new ArrayList<>(mediumWords);
+        hardWordsLeft = new ArrayList<>(hardWords);
 
-        Collections.shuffle(palabrasDisponiblesFaciles, random);
-        Collections.shuffle(palabrasDisponiblesMedias, random);
-        Collections.shuffle(palabrasDisponiblesDificiles, random);
+        Collections.shuffle(easyWordsLeft, random);
+        Collections.shuffle(mediumWordsLeft, random);
+        Collections.shuffle(hardWordsLeft, random);
     }
 
     /**
@@ -120,14 +120,14 @@ public class GameController {
     @FXML
     private void initialize() {
 
-        inicializarPalabrasDisponibles();
+        iniatilizateWordsLeft();
 
-        seleccionarPalabra();
-        actualizarInterfaz();
-        iniciarTimer();
+        selectWord();
+        updateScene();
+        startTimer();
 
 
-        entryTextField.setOnKeyPressed(this::manejarTeclaPresionada);
+        entryTextField.setOnKeyPressed(this::keyHandling);
 
 
         entryTextField.requestFocus();
@@ -139,15 +139,15 @@ public class GameController {
     /**
      * Selects the next word based on the current level.
      */
-    private void seleccionarPalabra() {
-        if (nivel <= 15) {
-            palabraActual = obtenerPalabraAleatoria(palabrasDisponiblesFaciles, palabrasFaciles);
+    private void selectWord() {
+        if (level <= 15) {
+            currentWord = getRandomWord(easyWordsLeft, easyWords);
 
-        } else if (nivel <= 30) {
-            palabraActual = obtenerPalabraAleatoria(palabrasDisponiblesMedias, palabrasMedias);
+        } else if (level <= 30) {
+            currentWord = getRandomWord(mediumWordsLeft, mediumWords);
 
         } else {
-            palabraActual = obtenerPalabraAleatoria(palabrasDisponiblesDificiles, palabrasDificiles);
+            currentWord = getRandomWord(hardWordsLeft, hardWords);
 
         }
         /**
@@ -158,16 +158,16 @@ public class GameController {
          * @return a random word
          */
     }
-    private String obtenerPalabraAleatoria(ArrayList<String> palabrasDisponibles, List<String> palabrasOriginales) {
+    private String getRandomWord(ArrayList<String> wordsLeft, List<String> palabrasOriginales) {
 
-        if (palabrasDisponibles.isEmpty()) {
-            palabrasDisponibles.addAll(palabrasOriginales);
-            Collections.shuffle(palabrasDisponibles, random);
+        if (wordsLeft.isEmpty()) {
+            wordsLeft.addAll(palabrasOriginales);
+            Collections.shuffle(wordsLeft, random);
         }
 
 
-        int indiceAleatorio = random.nextInt(palabrasDisponibles.size());
-        return palabrasDisponibles.remove(indiceAleatorio);
+        int randomIndex = random.nextInt(wordsLeft.size());
+        return wordsLeft.remove(randomIndex);
     }
     /**
      * ---------- TIMER MANAGEMENT ----------
@@ -175,14 +175,14 @@ public class GameController {
     /**
      * Starts the countdown timer for the current word.
      */
-    private void iniciarTimer() {
-        detenerTimer();
+    private void startTimer() {
+        stopTimer();
 
         timer = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-            tiempoRestante--;
-            actualizarInterfaz();
+            timeLeft--;
+            updateScene();
 
-            if (tiempoRestante <= 0) {
+            if (timeLeft <= 0) {
                 gameOver(false);
             }
         }));
@@ -193,7 +193,7 @@ public class GameController {
     /**
      * Stops the active timer, if any.
      */
-    private void detenerTimer() {
+    private void stopTimer() {
         if (timer != null) {
             timer.stop();
         }
@@ -201,9 +201,9 @@ public class GameController {
     /**
      * Resets the timer to the maximum allowed time and restarts it.
      */
-    private void reiniciarTimer() {
-        tiempoRestante = tiempoMaximo;
-        iniciarTimer();
+    private void resetTimer() {
+        timeLeft = maxTime;
+        startTimer();
     }
     /**
      * ---------- INPUT HANDLING ----------
@@ -214,33 +214,33 @@ public class GameController {
      *
      * @param event key event
      */
-    private void manejarTeclaPresionada(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER && juegoActivo) {
-            validarPalabra();
+    private void keyHandling(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER && gameActive) {
+            wordValidation();
         }
     }
     /**
      * Validates the player's typed word against the target word.
      * Updates score, level, and UI accordingly.
      */
-    private void validarPalabra() {
+    private void wordValidation() {
         String palabraEscrita = entryTextField.getText().trim();
 
-        if (palabraEscrita.equals(palabraActual)) {
+        if (palabraEscrita.equals(currentWord)) {
 
             success++;
-            nivel++;
+            level++;
             entryTextField.clear();
 
 
-            int reduccion = ((nivel - 1) / 5) * 2;
-            tiempoMaximo = Math.max(2, 20 - reduccion);
+            int reduccion = ((level - 1) / 5) * 2;
+            maxTime = Math.max(2, 20 - reduccion);
 
 
-            seleccionarPalabra();
+            selectWord();
 
 
-            reiniciarTimer();
+            resetTimer();
 
 
             entryTextField.setStyle("-fx-background-color: #ccffcc; -fx-border-color: green;");
@@ -248,15 +248,15 @@ public class GameController {
 
 
             Timeline feedback = new Timeline(new KeyFrame(Duration.millis(500), e -> {
-                if (juegoActivo) {
+                if (gameActive) {
                     entryTextField.setStyle("");
                 }
             }));
             feedback.play();
 
 
-            if (nivel > 45) {
-                juegoCompletado();
+            if (level > 45) {
+                gameComplete();
             }
 
         } else {
@@ -269,14 +269,14 @@ public class GameController {
 
 
             Timeline feedback = new Timeline(new KeyFrame(Duration.seconds(1), e -> {
-                if (juegoActivo) {
+                if (gameActive) {
                     entryTextField.setStyle("");
                 }
             }));
             feedback.play();
         }
 
-        actualizarInterfaz();
+        updateScene();
     }
     /**
      * ---------- GAME STATE ----------
@@ -287,11 +287,11 @@ public class GameController {
      * @param ganado true if the player won, false otherwise
      */
     private void gameOver(boolean ganado) {
-        juegoActivo = false;
-        detenerTimer();
+        gameActive = false;
+        stopTimer();
 
 
-        GameOverController.configurarResultado(ganado, nivel, success, failure);
+        GameOverController.resultConfiguration(ganado, level, success, failure);
 
 
         try {
@@ -307,26 +307,26 @@ public class GameController {
     /**
      * Called when the player completes all levels.
      */
-    private void juegoCompletado() {
+    private void gameComplete() {
         gameOver(true); // true = ganó el juego
     }
     /**
      * Resets the game to its initial state.
      */
-    private void reiniciarJuego() {
-        nivel = 1;
-        tiempoMaximo = 20;
-        tiempoRestante = 20;
-        juegoActivo = true;
+    private void resetGame() {
+        level = 1;
+        maxTime = 20;
+        timeLeft = 20;
+        gameActive = true;
         success = 0;
         failure = 0;
         entryTextField.clear();
         entryTextField.setStyle("");
-        inicializarPalabrasDisponibles();
+        iniatilizateWordsLeft();
 
-        seleccionarPalabra();
-        iniciarTimer();
-        actualizarInterfaz();
+        selectWord();
+        startTimer();
+        updateScene();
         entryTextField.requestFocus();
     }
     /**
@@ -335,29 +335,29 @@ public class GameController {
     /**
      * Updates labels and UI elements (level, time, word).
      */
-    private void actualizarInterfaz() {
+    private void updateScene() {
         if (maxTimeLabel != null) {
-            int tiempomaximo = tiempoMaximo;
+            int tiempomaximo = maxTime;
             maxTimeLabel.setText("Tiempo max: " + tiempomaximo);
         }
         if (levelLabel != null) {
-            String dificultad = obtenerDificultad();
-            levelLabel.setText("Nivel: " + nivel + " (" + dificultad + ")");
+            String dificultad = getDificulty();
+            levelLabel.setText("Nivel: " + level + " (" + dificultad + ")");
         }
         if (timeLabel != null) {
-            timeLabel.setText(String.valueOf(tiempoRestante));
+            timeLabel.setText(String.valueOf(timeLeft));
 
             // Cambiar color según el tiempo restante
-            if (tiempoRestante <= 3) {
+            if (timeLeft <= 3) {
                 timeLabel.setStyle("-fx-text-fill: red;");
-            } else if (tiempoRestante <= 7) {
+            } else if (timeLeft <= 7) {
                 timeLabel.setStyle("-fx-text-fill: orange;");
             } else {
                 timeLabel.setStyle("-fx-text-fill: white;");
             }
         }
         if (wordLabel != null) {
-            wordLabel.setText(palabraActual);
+            wordLabel.setText(currentWord);
         }
     }
     /**
@@ -365,10 +365,10 @@ public class GameController {
      *
      * @return "Fácil", "Media", or "Difícil"
      */
-    private String obtenerDificultad() {
-        if (nivel <= 15) {
+    private String getDificulty() {
+        if (level <= 15) {
             return "Fácil";
-        } else if (nivel <= 30) {
+        } else if (level <= 30) {
             return "Media";
         } else {
             return "Difícil";
@@ -383,10 +383,10 @@ public class GameController {
      * @param event button click event
      */
     @FXML
-    private void volverAlMenu(ActionEvent event) {
+    private void backToMenu(ActionEvent event) {
         // Detener el timer antes de salir
-        detenerTimer();
-        juegoActivo = false;
+        stopTimer();
+        gameActive = false;
 
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
@@ -404,14 +404,14 @@ public class GameController {
      * @param event button click event
      */
     @FXML
-    private void pausarJuego(ActionEvent event) {
+    private void pauseGame(ActionEvent event) {
         if (timer != null) {
-            if (juegoActivo) {
-                detenerTimer();
-                juegoActivo = false;
+            if (gameActive) {
+                stopTimer();
+                gameActive = false;
             } else {
-                iniciarTimer();
-                juegoActivo = true;
+                startTimer();
+                gameActive = true;
             }
         }
     }
@@ -429,7 +429,7 @@ public class GameController {
     }
     /** @return current level */
 
-    public int getNivel() {
-        return nivel;
+    public int getLevel() {
+        return level;
     }
 }

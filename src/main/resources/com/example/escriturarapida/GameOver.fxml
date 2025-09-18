@@ -28,22 +28,22 @@
                         <Image url="@Images/Resultados.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="resultadoLabel" layoutX="199.0" layoutY="132.0" text="Ganaste">
+                <Label fx:id="resultsLabel" layoutX="199.0" layoutY="132.0" text="Ganaste">
                     <font>
                         <Font name="Jersey 20 Regular" size="64.0" />
                     </font>
                 </Label>
-                <Button layoutX="144.0" layoutY="428.0" mnemonicParsing="false" onAction="#reintentar" style="-fx-background-color: transparent;" text="Retry">
+                <Button layoutX="144.0" layoutY="428.0" mnemonicParsing="false" onAction="#restart" style="-fx-background-color: transparent;" text="Retry">
                     <font>
                         <Font name="Jersey 20 Regular" size="24.0" />
                     </font>
                 </Button>
-                <Button layoutX="258.0" layoutY="428.0" mnemonicParsing="false" onAction="#verEstadisticas" style="-fx-background-color: transparent;" text="Stats">
+                <Button layoutX="258.0" layoutY="428.0" mnemonicParsing="false" onAction="#seeStats" style="-fx-background-color: transparent;" text="Stats">
                     <font>
                         <Font name="Jersey 20 Regular" size="24.0" />
                     </font>
                 </Button>
-                <Button layoutX="377.0" layoutY="428.0" mnemonicParsing="false" onAction="#salir" style="-fx-background-color: transparent;" text="Exit">
+                <Button layoutX="377.0" layoutY="428.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: transparent;" text="Exit">
                     <font>
                         <Font name="Jersey 20 Regular" size="24.0" />
                     </font>

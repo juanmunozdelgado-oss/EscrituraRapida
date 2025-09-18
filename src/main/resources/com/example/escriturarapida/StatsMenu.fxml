@@ -33,17 +33,17 @@
                         <Font name="Jersey 20 Regular" size="48.0" />
                     </font>
                 </Label>
-                <Label fx:id="palabrasCorrectasLabel" layoutX="169.0" layoutY="232.0" text="Palabras Correctas: 0">
+                <Label fx:id="rightWordsLabel" layoutX="169.0" layoutY="232.0" text="Palabras Correctas: 0">
                     <font>
                         <Font name="Jersey 20 Regular" size="24.0" />
                     </font>
                 </Label>
-                <Label fx:id="erroresLabel" layoutX="169.0" layoutY="256.0" text="Errores: 0">
+                <Label fx:id="errorsLabel" layoutX="169.0" layoutY="256.0" text="Errores: 0">
                     <font>
                         <Font name="Jersey 20 Regular" size="24.0" />
                     </font>
                 </Label>
-                <Button layoutX="250.0" layoutY="308.0" mnemonicParsing="false" onAction="#salir" style="-fx-background-color: transparent;" text="Exit">
+                <Button layoutX="250.0" layoutY="308.0" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: transparent;" text="Exit">
                     <font>
                         <Font name="Jersey 20 Regular" size="36.0" />
                     </font>

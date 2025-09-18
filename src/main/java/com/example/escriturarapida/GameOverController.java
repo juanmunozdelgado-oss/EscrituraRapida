@@ -1,6 +1,5 @@
 package com.example.escriturarapida;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,14 +37,14 @@ public class GameOverController {
      * ---------- FXML UI ELEMENTS ----------
      */
     @FXML
-    private Label resultadoLabel;
+    private Label resultsLabel;
     /**
      * ---------- GAME RESULT VARIABLES ----------
      */
-    private static boolean juegoGanado = false;
-    private static int nivelAlcanzado = 1;
-    private static int palabrasCorrectas = 0;
-    private static int errores = 0;
+    private static boolean gameState = false;
+    private static int levelReached = 1;
+    private static int rightWords = 0;
+    private static int errors = 0;
     /**
      * ---------- INITIALIZATION ----------
      */
@@ -56,7 +55,7 @@ public class GameOverController {
      */
     @FXML
     private void initialize() {
-        actualizarResultado();
+        updateResults();
     }
     /**
      * Configures the game result before showing the Game Over screen.
@@ -66,23 +65,23 @@ public class GameOverController {
      * @param correctas number of correct words typed
      * @param fallos    number of incorrect attempts
      */
-    public static void configurarResultado(boolean ganado, int nivel, int correctas, int fallos) {
-        juegoGanado = ganado;
-        nivelAlcanzado = nivel;
-        palabrasCorrectas = correctas;
-        errores = fallos;
+    public static void resultConfiguration(boolean ganado, int nivel, int correctas, int fallos) {
+        gameState = ganado;
+        levelReached = nivel;
+        rightWords = correctas;
+        errors = fallos;
     }
     /**
      * Updates the label text and style depending on win or loss.
      */
-    private void actualizarResultado() {
-        if (resultadoLabel != null) {
-            if (juegoGanado) {
-                resultadoLabel.setText("¡Ganaste!");
-                resultadoLabel.setStyle("-fx-text-fill: #00FF00;"); // Verde para victoria
+    private void updateResults() {
+        if (resultsLabel != null) {
+            if (gameState) {
+                resultsLabel.setText("¡Ganaste!");
+                resultsLabel.setStyle("-fx-text-fill: #00FF00;");
             } else {
-                resultadoLabel.setText("Perdiste");
-                resultadoLabel.setStyle("-fx-text-fill: #FF0000;"); // Rojo para derrota
+                resultsLabel.setText("Perdiste");
+                resultsLabel.setStyle("-fx-text-fill: #FF0000;");
             }
         }
     }
@@ -96,7 +95,7 @@ public class GameOverController {
      * @param event button click event
      */
     @FXML
-    private void reintentar(ActionEvent event) {
+    private void restart(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("GameMenu.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -113,9 +112,9 @@ public class GameOverController {
      * @param event button click event
      */
     @FXML
-    private void verEstadisticas(ActionEvent event) {
+    private void seeStats(ActionEvent event) {
         try {
-            StatsController.actualizarStats(palabrasCorrectas, errores);
+            StatsController.updateStats(rightWords, errors);
 
             Parent root = FXMLLoader.load(getClass().getResource("StatsMenu.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -132,7 +131,7 @@ public class GameOverController {
      * @param event button click event
      */
     @FXML
-    private void salir(ActionEvent event) {
+    private void exit(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("MainMenu.fxml"));
             Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
