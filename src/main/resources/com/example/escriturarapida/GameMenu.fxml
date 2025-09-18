@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="600.0" styleClass="Game" stylesheets="@CSS/Style.css" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.escriturarapida.GameController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <!-- Panel de Nivel -->
+        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="5.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Images/MaderaRustica.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="nivelLabel" layoutX="34.0" layoutY="46.0" text="Nivel: 1 (Fácil)" textFill="#fcfcfc">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="tiempoMaxLabel" layoutX="37.0" layoutY="74.0" text="Tiempo máx: 20s" textFill="#fcfcfc">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+
+        <!-- Panel de Timer -->
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <children>
+                <ImageView fitHeight="133.0" fitWidth="136.0" layoutX="98.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Images/TimerImage.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="tiempoLabel" layoutX="145.0" layoutY="43.0" text="20" textFill="WHITE">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="48.0" />
+                    </font>
+                </Label>
+                <Label layoutX="155.0" layoutY="91.0" text="seg" textFill="#fcfcfc">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="16.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+
+        <!-- Panel de Palabra -->
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+            <children>
+                <ImageView fitHeight="176.0" fitWidth="350.0" layoutX="131.0" layoutY="-35.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Images/CuadroDeTexto.png" />
+                    </image>
+                </ImageView>
+                <Label fx:id="palabraLabel" layoutX="180.0" layoutY="35.0" text="casa" textAlignment="CENTER">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="24.0" />
+                    </font>
+                </Label>
+                <Label layoutX="243.0" layoutY="7.0" text="Escribe esta palabra:">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="14.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+
+        <!-- Panel de Entrada y Controles -->
+        <AnchorPane prefHeight="200.0" prefWidth="612.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+            <children>
+            <ImageView fitHeight="133.0" fitWidth="136.0" layoutX="434.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/MaderaRustica.png" />
+               </image>
+            </ImageView>
+                <ImageView fitHeight="162.0" fitWidth="255.0" layoutX="173.0" layoutY="-14.0" pickOnBounds="true" preserveRatio="true">
+                    <image>
+                        <Image url="@Images/WritingImage.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="entradaTextField" layoutX="213.0" layoutY="47.0" prefHeight="28.0" prefWidth="172.0">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="16.0" />
+                    </font>
+                </TextField>
+
+                <!-- Controles del juego -->
+                <HBox layoutX="20.0" layoutY="90.0" spacing="10.0">
+                    <children>
+                        <Button fx:id="volverButton" mnemonicParsing="false" onAction="#volverAlMenu" style="-fx-background-color: #FF6B6B; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 6;" text="Volver">
+                            <font>
+                                <Font name="Jersey 20 Regular" size="12.0" />
+                            </font>
+                        </Button>
+                        <Button fx:id="pausarButton" mnemonicParsing="false" onAction="#pausarJuego" style="-fx-background-color: #FFD93D; -fx-background-radius: 8; -fx-border-color: #000000; -fx-border-radius: 6;" text="Pausar">
+                            <font>
+                                <Font name="Jersey 20 Regular" size="12.0" />
+                            </font>
+                        </Button>
+                    </children>
+                </HBox>
+
+                <!-- Instrucciones -->
+                <Label layoutX="450.0" layoutY="20.0" text="Instrucciones:" textFill="WHITE">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="12.0" />
+                    </font>
+                </Label>
+                <Label layoutX="452.0" layoutY="42.0" text="• Escribe la palabra" textFill="WHITE">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="10.0" />
+                    </font>
+                </Label>
+                <Label layoutX="452.0" layoutY="54.0" text="• Presiona Enter" textFill="WHITE">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="10.0" />
+                    </font>
+                </Label>
+                <Label layoutX="450.0" layoutY="67.0" text="• ¡No te quedes sin tiempo!" textFill="WHITE">
+                    <font>
+                        <Font name="Jersey 20 Regular" size="10.0" />
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</GridPane>
