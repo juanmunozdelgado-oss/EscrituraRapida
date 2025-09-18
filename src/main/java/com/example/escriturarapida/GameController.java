@@ -153,15 +153,15 @@ public class GameController {
         /**
          * Returns a random word from the available pool. Replenishes the pool if empty.
          *
-         * @param palabrasDisponibles the mutable pool of remaining words
-         * @param palabrasOriginales  the original full list for this difficulty
+         * @param wordsLeft the mutable pool of remaining words
+         * @param originalWords  the original full list for this difficulty
          * @return a random word
          */
     }
-    private String getRandomWord(ArrayList<String> wordsLeft, List<String> palabrasOriginales) {
+    private String getRandomWord(ArrayList<String> wordsLeft, List<String> originalWords) {
 
         if (wordsLeft.isEmpty()) {
-            wordsLeft.addAll(palabrasOriginales);
+            wordsLeft.addAll(originalWords);
             Collections.shuffle(wordsLeft, random);
         }
 
@@ -284,14 +284,14 @@ public class GameController {
     /**
      * Ends the game and loads the Game Over screen.
      *
-     * @param ganado true if the player won, false otherwise
+     * @param win true if the player won, false otherwise
      */
-    private void gameOver(boolean ganado) {
+    private void gameOver(boolean win) {
         gameActive = false;
         stopTimer();
 
 
-        GameOverController.resultConfiguration(ganado, level, success, failure);
+        GameOverController.resultConfiguration(win, level, success, failure);
 
 
         try {
@@ -308,7 +308,7 @@ public class GameController {
      * Called when the player completes all levels.
      */
     private void gameComplete() {
-        gameOver(true); // true = ganó el juego
+        gameOver(true);
     }
     /**
      * Resets the game to its initial state.
