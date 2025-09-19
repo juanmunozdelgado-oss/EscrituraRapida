@@ -2,23 +2,23 @@
     -fx-background-image:url("../Images/MainMenuImage.jpg");
     -fx-background-size:cover;
     -fx-pref-width: 600px;
-    -fx-arc-height: 400px;
+    -fx-arc-height: 600px;
 }
 .Help{
     -fx-background-image:url("../Images/HelpImage.jpg") ;
     -fx-background-size:cover;
     -fx-pref-width: 600px;
-    -fx-arc-height: 400px;
+    -fx-arc-height: 600px;
 }
 .Game{
     -fx-background-image: url("../Images/GameFondo.png");
     -fx-background-size:cover;
     -fx-pref-width: 600px;
-    -fx-arc-height: 400px;
+    -fx-arc-height: 600px;
 }
 .Final{
     -fx-background-image: url("../Images/GameOverImage.jpg");
     -fx-background-size:cover;
     -fx-pref-width: 600px;
-    -fx-arc-height: 400px;
+    -fx-arc-height: 600px;
 }
