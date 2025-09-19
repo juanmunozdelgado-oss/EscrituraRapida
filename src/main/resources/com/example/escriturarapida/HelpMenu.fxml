@@ -56,7 +56,7 @@
                                 <Font name="Jersey 20 Regular" size="18.0" />
                             </font>
                         </Label>
-                      <Button layoutX="237.0" layoutY="241.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: #8AF25C; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 13;" text="Volver">
+                      <Button fx:id="backButton" layoutX="237.0" layoutY="241.0" mnemonicParsing="false" onAction="#back" style="-fx-background-color: #8AF25C; -fx-background-radius: 16; -fx-border-color: #000000; -fx-border-radius: 13;" text="Volver">
                           <font>
                               <Font name="Jersey 20 Regular" size="36.0" />
                           </font>

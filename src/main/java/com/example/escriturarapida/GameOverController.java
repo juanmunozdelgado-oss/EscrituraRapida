@@ -45,6 +45,7 @@ public class GameOverController {
     private static int levelReached = 1;
     private static int rightWords = 0;
     private static int errors = 0;
+
     /**
      * ---------- INITIALIZATION ----------
      */

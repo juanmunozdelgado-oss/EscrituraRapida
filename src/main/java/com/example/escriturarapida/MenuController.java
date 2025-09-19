@@ -32,11 +32,6 @@ import java.io.IOException;
 
 public class MenuController {
     /**
-     * ---------- FXML UI ELEMENTS ----------
-     */
-    @FXML
-    private Button helpButton;
-    /**
      * ---------- BUTTON HANDLERS ----------
      */
 

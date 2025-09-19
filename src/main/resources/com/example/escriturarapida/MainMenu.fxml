@@ -28,7 +28,7 @@
                         </Label>
                     </children>
                 </AnchorPane>
-                <Button mnemonicParsing="false" onAction="#play" prefHeight="62.0" prefWidth="132.0" style="-fx-border-radius: 18; -fx-background-radius: 18; -fx-background-color: #8AF25C; -fx-border-color: #000000;" text="Jugar">
+                <Button fx:id="playButton" mnemonicParsing="false" onAction="#play" prefHeight="62.0" prefWidth="132.0" style="-fx-border-radius: 18; -fx-background-radius: 18; -fx-background-color: #8AF25C; -fx-border-color: #000000;" text="Jugar">
                     <VBox.margin>
                         <Insets bottom="50.0" top="50.0" />
                     </VBox.margin>
@@ -44,7 +44,7 @@
                         <Insets bottom="20.0" />
                     </VBox.margin>
                 </Button>
-                <Button mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #8AF25C; -fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" text="Salir">
+                <Button fx:id="exitButton" mnemonicParsing="false" onAction="#exit" style="-fx-background-color: #8AF25C; -fx-border-color: #000000; -fx-border-radius: 16; -fx-background-radius: 16;" text="Salir">
                     <font>
                         <Font name="Agency FB" size="24.0" />
                     </font>
