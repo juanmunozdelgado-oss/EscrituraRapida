@@ -224,9 +224,9 @@ public class GameController {
      * Updates score, level, and UI accordingly.
      */
     private void wordValidation() {
-        String palabraEscrita = entryTextField.getText().trim();
+        String userWord = entryTextField.getText().trim();
 
-        if (palabraEscrita.equals(currentWord)) {
+        if (userWord.equals(currentWord)) {
 
             success++;
             level++;
